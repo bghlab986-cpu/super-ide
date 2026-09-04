@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Super IDE - محرر أكواد متقدم</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/editor.css">
+    <link rel="stylesheet" href="styles/game.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo">
+                <i class="fas fa-code"></i>
+                <span>Super IDE</span>
+            </div>
+            
+            <nav class="nav-menu">
+                <button class="nav-btn active" data-section="editor">
+                    <i class="fas fa-edit"></i>
+                    <span>محرر الأكواد</span>
+                </button>
+                <button class="nav-btn" data-section="game">
+                    <i class="fas fa-gamepad"></i>
+                    <span>محرك الألعاب</span>
+                </button>
+                <button class="nav-btn" data-section="files">
+                    <i class="fas fa-folder"></i>
+                    <span>إدارة الملفات</span>
+                </button>
+                <button class="nav-btn" data-section="scraper">
+                    <i class="fas fa-download"></i>
+                    <span>جلب من الويب</span>
+                </button>
+                <button class="nav-btn" data-section="settings">
+                    <i class="fas fa-cog"></i>
+                    <span>الإعدادات</span>
+                </button>
+            </nav>
+
+            <div class="user-section">
+                <button class="logout-btn">
+                    <i class="fas fa-sign-out-alt"></i>
+                    تسجيل الخروج
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Header -->
+            <header class="header">
+                <div class="header-left">
+                    <button class="menu-toggle">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <h1 id="page-title">محرر الأكواد</h1>
+                </div>
+                <div class="header-right">
+                    <button class="btn-icon" title="حفظ">
+                        <i class="fas fa-save"></i>
+                    </button>
+                    <button class="btn-icon" title="تشغيل">
+                        <i class="fas fa-play"></i>
+                    </button>
+                    <button class="btn-icon" title="إعدادات">
+                        <i class="fas fa-cog"></i>
+                    </button>
+                </div>
+            </header>
+
+            <!-- Content Sections -->
+            <div class="content-sections">
+                
+                <!-- Editor Section -->
+                <section id="editor-section" class="section active">
+                    <div class="editor-container">
+                        <div class="editor-header">
+                            <div class="file-tabs">
+                                <div class="tab active" data-file="index.html">
+                                    <span>index.html</span>
+                                    <button class="close-tab">×</button>
+                                </div>
+                                <button class="add-tab">+</button>
+                            </div>
+                        </div>
+
+                        <div class="editor-body">
+                            <div class="editor-main">
+                                <textarea id="code-editor" class="code-editor" spellcheck="false"><!-- أكتب أكوادك هنا -->
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;مرحبا بك&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;أهلا وسهلا!&lt;/h1&gt;
+&lt;/body&gt;
+&lt;/html&gt;</textarea>
+                                <div class="line-numbers" id="line-numbers"></div>
+                            </div>
+
+                            <div class="editor-preview">
+                                <div class="preview-header">
+                                    <h3>معاينة</h3>
+                                    <button class="refresh-preview">
+                                        <i class="fas fa-sync"></i>
+                                    </button>
+                                </div>
+                                <iframe id="preview-frame" class="preview-frame"></iframe>
+                            </div>
+                        </div>
+
+                        <div class="console">
+                            <div class="console-header">
+                                <h3>Console</h3>
+                                <button class="clear-console">مسح</button>
+                            </div>
+                            <div class="console-output" id="console-output"></div>
+                            <input type="text" class="console-input" placeholder="أكتب الأمر...">
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Game Engine Section -->
+                <section id="game-section" class="section">
+                    <div class="game-container">
+                        <div class="game-editor">
+                            <h2>محرك الألعاب</h2>
+                            <div class="game-controls">
+                                <button class="btn-primary">
+                                    <i class="fas fa-plus"></i>
+                                    مشروع جديد
+                                </button>
+                                <button class="btn-primary">
+                                    <i class="fas fa-play"></i>
+                                    تشغيل اللعبة
+                                </button>
+                            </div>
+                            <canvas id="game-canvas" class="game-canvas" width="800" height="600"></canvas>
+                        </div>
+
+                        <div class="game-properties">
+                            <h3>الخصائص</h3>
+                            <div class="properties-list">
+                                <div class="property">
+                                    <label>حجم العرض:</label>
+                                    <input type="number" value="800">
+                                </div>
+                                <div class="property">
+                                    <label>حجم الارتفاع:</label>
+                                    <input type="number" value="600">
+                                </div>
+                                <div class="property">
+                                    <label>لون الخلفية:</label>
+                                    <input type="color" value="#000000">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- File Manager Section -->
+                <section id="files-section" class="section">
+                    <div class="files-container">
+                        <div class="files-toolbar">
+                            <button class="btn-primary">
+                                <i class="fas fa-plus"></i>
+                                ملف جديد
+                            </button>
+                            <button class="btn-primary">
+                                <i class="fas fa-folder-plus"></i>
+                                مجلد جديد
+                            </button>
+                        </div>
+
+                        <div class="files-upload">
+                            <div class="drop-zone" id="drop-zone">
+                                <i class="fas fa-cloud-upload-alt"></i>
+                                <p>اسحب الملفات هنا أو انقر للاختيار</p>
+                                <input type="file" id="file-input" multiple style="display: none;">
+                            </div>
+                        </div>
+
+                        <div class="files-list">
+                            <h3>الملفات</h3>
+                            <ul id="files-tree" class="file-tree">
+                                <li class="folder">
+                                    <i class="fas fa-folder"></i>
+                                    <span>المشروع</span>
+                                    <ul>
+                                        <li class="file">
+                                            <i class="fas fa-file-code"></i>
+                                            <span>index.html</span>
+                                        </li>
+                                        <li class="file">
+                                            <i class="fas fa-file-code"></i>
+                                            <span>style.css</span>
+                                        </li>
+                                        <li class="file">
+                                            <i class="fas fa-file-code"></i>
+                                            <span>script.js</span>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Web Scraper Section -->
+                <section id="scraper-section" class="section">
+                    <div class="scraper-container">
+                        <div class="scraper-form">
+                            <h2>جلب البيانات من الويب</h2>
+                            <div class="form-group">
+                                <label>رابط الموقع:</label>
+                                <input type="url" id="scraper-url" placeholder="https://example.com" class="form-control">
+                            </div>
+
+                            <div class="form-group">
+                                <label>نوع البيانات:</label>
+                                <select class="form-control">
+                                    <option>HTML</option>
+                                    <option>JSON</option>
+                                    <option>CSV</option>
+                                    <option>الصور</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label>محدد CSS:</label>
+                                <input type="text" placeholder=".class-name أو #id-name" class="form-control">
+                            </div>
+
+                            <button class="btn-primary">
+                                <i class="fas fa-download"></i>
+                                جلب البيانات
+                            </button>
+                        </div>
+
+                        <div class="scraper-results">
+                            <h3>النتائج</h3>
+                            <div id="scraper-output" class="scraper-output">
+                                انتظر النتائج...
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Settings Section -->
+                <section id="settings-section" class="section">
+                    <div class="settings-container">
+                        <h2>الإعدادات</h2>
+                        
+                        <div class="settings-group">
+                            <h3>المظهر</h3>
+                            <div class="setting-item">
+                                <label>المظهر الليلي:</label>
+                                <input type="checkbox" class="toggle" id="dark-mode">
+                            </div>
+                            <div class="setting-item">
+                                <label>حجم الخط:</label>
+                                <input type="range" min="12" max="20" value="14" class="slider">
+                            </div>
+                        </div>
+
+                        <div class="settings-group">
+                            <h3>الأداء</h3>
+                            <div class="setting-item">
+                                <label>حفظ تلقائي:</label>
+                                <input type="checkbox" class="toggle" checked>
+                            </div>
+                        </div>
+
+                        <div class="settings-group">
+                            <h3>حساب</h3>
+                            <button class="btn-danger">حذف الحساب</button>
+                        </div>
+                    </div>
+                </section>
+
+            </div>
+        </main>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/main.js"></script>
+    <script src="js/editor.js"></script>
+    <script src="js/game.js"></script>
+    <script src="js/filemanager.js"></script>
+    <script src="js/scraper.js"></script>
+    <script src="js/utils.js"></script>
+</body>
+</html>
